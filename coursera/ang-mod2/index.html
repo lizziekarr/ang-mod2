@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Shopping Checklist</title>
+    <script type="text/javascript" src = 'angular.min.js'></script>
+    <script type="text/javascript" src = 'app.js'></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body ng-app = 'app'>
+    <h1>Shopping Checklist</h1>
+    <div class = 'lists'>
+      <h2>Items to Buy</h2>
+        <section class = 'itemsToBuy list' ng-controller = 'ToBuyController as showItems'>
+          <div ng-repeat = 'item in showItems.itemsToBuy'>
+            <li>{{item}}</li>
+            <input type="checkbox" name="bought" value="false">
+          </div>
+
+        </section>
+      <h2>Already Bought</h2>
+        <section class="itemsBought list" ng-controller = 'AlreadyBoughtController as showBought'>
+          <div  ng-repeat = 'item in showBought.itemsBought'>
+            <li>{{item}}</li>
+          </div>
+        </section>
+  </div>
+  </body>
+</html>
