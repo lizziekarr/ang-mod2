@@ -5,23 +5,30 @@
     <title>Shopping Checklist</title>
     <script type="text/javascript" src = 'angular.min.js'></script>
     <script type="text/javascript" src = 'app.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body ng-app = 'app'>
+  <body ng-app = 'app' ng-controller = 'ToBuyController as showItems'>
     <h1>Shopping Checklist</h1>
-    <div class = 'lists'>
-      <h2>Items to Buy</h2>
-        <section class = 'itemsToBuy list' ng-controller = 'ToBuyController as showItems'>
-          <div ng-repeat = 'item in showItems.itemsToBuy'>
-            <li>{{item}}</li>
-            <input type="checkbox" name="bought" value="false">
-          </div>
+    <section class = 'itemsToAdd' well>
+      <input type="text" ng-model='newItemName' value="" ng-submit = 'showItems.addItem(newItemName)'>
+      <button type="button" name="button" ng-click = 'showItems.addItem(newItemName)'>Add to Shopping List</button>
+    </section>
 
+    <div class = 'lists'>
+
+        <section class = 'itemsToBuy list well'>
+          <h2>Items to Buy</h2>
+          <div ng-repeat = 'item in showItems.itemsToBuy'>
+            <li>{{item.name}}</li>
+            <input type="checkbox" ng-model="item.bought" value ='false' ng-click = 'showItems.adjustLists(item)'>
+          </div>
         </section>
-      <h2>Already Bought</h2>
-        <section class="itemsBought list" ng-controller = 'AlreadyBoughtController as showBought'>
+
+        <section class="itemsBought list well" ng-controller = 'AlreadyBoughtController as showBought'>
+          <h2>Already Bought</h2>
           <div  ng-repeat = 'item in showBought.itemsBought'>
-            <li>{{item}}</li>
+            <li>{{item.name}}</li>
           </div>
         </section>
   </div>

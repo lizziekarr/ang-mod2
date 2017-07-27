@@ -12,6 +12,8 @@ app.controller('ToBuyController', ToBuyController)
   function ToBuyController(MoveItemService){
     var showItems = this;
     showItems.itemsToBuy = MoveItemService.getItems();
+    showItems.adjustLists = MoveItemService.adjust();
+    showItems.addItem = MoveItemService.add();
   }
 
   AlreadyBoughtController.$inject = ['MoveItemService'];
@@ -22,7 +24,16 @@ app.controller('ToBuyController', ToBuyController)
 
   function MoveItemService(){
     var service = this;
-    var items = ['bread', 'cheese', 'eggs', 'milk', 'cinnamon'];
+    var items = [
+      {name: 'bread'},
+      {name: 'cheese'},
+      {name: 'eggs'},
+      {name: 'pasta'},
+      {name: 'marinara'},
+      {name: 'olive oil'},
+      {name: 'basil'}
+    ];
+
     var itemsBought = [];
     service.getItems = function(){
       return items;
@@ -30,7 +41,32 @@ app.controller('ToBuyController', ToBuyController)
     service.getItemsBought = function(){
       return itemsBought;
     }
+
+    service.add = function(){
+      return function(itemName){
+      var newItem = {
+        name: itemName
+      }
+      items.push(newItem);
+    }
   }
 
+    function wasBought(item){
+        return item.bought === true;
+      }
+
+    service.adjust = function(){
+      return function(item){
+        if (item.bought === true){
+          itemsBought.push(item);
+          var i = items.indexOf(item);
+          if(i != -1) {
+	           items.splice(i, 1);
+        }
+        }
+      }
+    }
+
+  }
 
 })();

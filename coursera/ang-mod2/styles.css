@@ -2,6 +2,10 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  text-align: center;
+}
+
 li {
   list-style-type: none;
   display: inline-block;
@@ -11,4 +15,15 @@ li {
   display: inline-block;
   margin: 20px;
   width: 50vw;
+}
+
+.lists {
+  display: flex;
+  justify-content: space-around;
+}
+
+.itemsToAdd {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
 }
